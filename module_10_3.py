@@ -14,7 +14,7 @@ class Bank:
     def deposit(self):
         with self.lock:
             for i in range(100):
-                x = self.balance + self.cash
+                self.balance += self.cash
                 print(f'Пополнение: {self.cash}. Баланс: {self.balance}')
                 time.sleep(0.001)
 
@@ -22,8 +22,8 @@ class Bank:
         for i in range(100):
             print(f'Запрос на {self.cash}')
             if self.cash <= self.balance or self.cash == self.balance:
-                y = self.balance - self.cash
-                print(f'Снятие: <{self.cash}. Баланс: {self.balance}')
+                self.balance -= self.cash
+                print(f'Снятие: {self.cash}. Баланс: {self.balance}')
             else:
                 print(f'Запрос отклонён, недостаточно средств')
                 self.lock.acquire()
